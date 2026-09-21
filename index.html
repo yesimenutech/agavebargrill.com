@@ -703,17 +703,28 @@
             <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1789501901/AgaveBarGrillLOGO__1___1_1_umsijx.png" id="hero-logo" alt="Agave Bar and Grill Logo" class="hero-logo" width="250" height="250">
             
             <div class="hero-buttons">
-                <script src="https://www.fbgcdn.com/embedder/js/ewm2.js"></script>
-                <script src="https://menutech.xyz/menutechUI.min.js"></script>
+    <!-- Contenedor del botón de menú de GloriaFood mediante el Widget de MenuTech -->
+    <menutech-orders 
+        id="hero-orders" 
+        cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" 
+        ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" 
+        background="#C8102E" 
+        color="#ffffff">
+    </menutech-orders>
 
-                <menutech-orders id="hero-orders" cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" background="#C8102E" color="#ffffff" data-glf-cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" data-glf-ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb">
-                </menutech-orders>
+    <div id="hero-reservations-wrapper" style="display: none;">
+        <menutech-reservations 
+            id="hero-reservations" 
+            cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" 
+            ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" 
+            background="#1a1a1a" 
+            color="#ffffff">
+        </menutech-reservations>
+    </div>
 
-                <div id="hero-reservations-wrapper" style="display: none;">
-                    <menutech-reservations id="hero-reservations" cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" background="#1a1a1a" color="#ffffff" data-glf-cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" data-glf-ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" data-glf-reservation="true">
-                    </menutech-reservations>
-                </div>
-
+    <!-- Script de MenuTech que hace el bypass de validación de dominio -->
+    <script src="https://menutech.xyz/menutechUI.min.js"></script>
+</div>
                 <script>
                 setTimeout(() => { if(window.glfBindButtons) window.glfBindButtons(); }, 1000);
                 </script>
