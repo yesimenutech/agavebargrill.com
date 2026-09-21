@@ -251,13 +251,14 @@
         .hero-address::after { right: -60px; }
 
         .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 30px;
-            width: 100%;
-        }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Espacio entre el botón de órdenes y el de reservas */
+    margin-top: 20px;
+    width: 100%;
+}
 
         /* Specialized Buttons inside Menutech tags styling bypass */
         menutech-orders, menutech-reservations {
@@ -941,7 +942,7 @@
 
             const resWrapper = document.getElementById('hero-reservations-wrapper');
             if (resWrapper) {
-                resWrapper.style.setProperty('display', (data.showReservations !== false) ? 'inline-block' : 'none', 'important');
+                resWrapper.style.setProperty('display', (data.showReservations !== false) ? 'flex' : 'none', 'important');
                 const resBtn = resWrapper.querySelector('menutech-reservations');
                 if (resBtn) {
                     const newResBtn = document.createElement('menutech-reservations');
@@ -956,7 +957,13 @@
                 }
             }
 
-            if (window.glfBindButtons) window.glfBindButtons();
+            // Reintentar la conexión si el script de MenuTech aún está cargando
+const checkGLF = setInterval(() => {
+    if (typeof window.glfBindButtons === 'function') {
+        window.glfBindButtons();
+        clearInterval(checkGLF);
+    }
+}, 300); // Verifica cada 300ms hasta que el script responda
 
             if (data.heroImg) {
                 const heroSection = document.getElementById('hero-section');
