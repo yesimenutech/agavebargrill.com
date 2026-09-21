@@ -14,6 +14,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Script base de GloriaFood añadido para asegurar la funcionalidad -->
+    <script src="https://www.fbgcdn.com/embedder/js/ewm2/glf-1-ui.js" defer></script>
+
     <style>
         :root {
             --color-bg-dark: #080808;
@@ -223,7 +227,7 @@
             width: auto;
             margin: 0 auto 40px;
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
-            transform: translateZ(0); /* Hardware acceleration */
+            transform: translateZ(0);
         }
 
         .hero-address {
@@ -251,14 +255,14 @@
         .hero-address::after { right: -60px; }
 
         .hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 15px; /* Espacio entre el botón de órdenes y el de reservas */
-    margin-top: 20px;
-    width: 100%;
-}
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            width: 100%;
+        }
 
         /* Specialized Buttons inside Menutech tags styling bypass */
         menutech-orders, menutech-reservations {
@@ -704,31 +708,27 @@
             <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1789501901/AgaveBarGrillLOGO__1___1_1_umsijx.png" id="hero-logo" alt="Agave Bar and Grill Logo" class="hero-logo" width="250" height="250">
             
             <div class="hero-buttons">
-    <!-- Contenedor del botón de menú de GloriaFood mediante el Widget de MenuTech -->
-    <menutech-orders 
-        id="hero-orders" 
-        cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" 
-        ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" 
-        background="#C8102E" 
-        color="#ffffff">
-    </menutech-orders>
+                <!-- Contenedor del botón de menú de GloriaFood mediante el Widget de MenuTech -->
+                <menutech-orders 
+                    id="hero-orders" 
+                    cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" 
+                    ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" 
+                    background="#C8102E" 
+                    color="#ffffff">
+                </menutech-orders>
 
-    <div id="hero-reservations-wrapper" style="display: none;">
-        <menutech-reservations 
-            id="hero-reservations" 
-            cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" 
-            ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" 
-            background="#1a1a1a" 
-            color="#ffffff">
-        </menutech-reservations>
-    </div>
+                <div id="hero-reservations-wrapper" style="display: none;">
+                    <menutech-reservations 
+                        id="hero-reservations" 
+                        cuid="8fa86f47-4c61-4bd4-898c-23980297f61a" 
+                        ruid="948b3614-74ef-4aa3-9c7f-04518b6005cb" 
+                        background="#1a1a1a" 
+                        color="#ffffff">
+                    </menutech-reservations>
+                </div>
 
-    <!-- Script de MenuTech que hace el bypass de validación de dominio -->
-    <script src="https://menutech.xyz/menutechUI.min.js"></script>
-</div>
-                <script>
-                setTimeout(() => { if(window.glfBindButtons) window.glfBindButtons(); }, 1000);
-                </script>
+                <!-- Script de MenuTech que hace el bypass de validación de dominio -->
+                <script src="https://menutech.xyz/menutechUI.min.js"></script>
             </div>
             
             <p class="hero-address" id="hero-address">402 First Street, Tybee Island, GA 31328</p>
@@ -930,14 +930,11 @@
 
             const ordersBtn = document.querySelector('menutech-orders');
             if (ordersBtn) {
-                const newOrdersBtn = document.createElement('menutech-orders');
-                newOrdersBtn.setAttribute('cuid', cuid);
-                newOrdersBtn.setAttribute('ruid', ruid);
-                newOrdersBtn.setAttribute('background', '#C8102E');
-                newOrdersBtn.setAttribute('color', '#ffffff');
-                newOrdersBtn.setAttribute('data-glf-cuid', cuid);
-                newOrdersBtn.setAttribute('data-glf-ruid', ruid);
-                ordersBtn.parentNode.replaceChild(newOrdersBtn, ordersBtn);
+                // Actualiza los atributos del nodo existente sin destruirlo
+                ordersBtn.setAttribute('cuid', cuid);
+                ordersBtn.setAttribute('ruid', ruid);
+                ordersBtn.setAttribute('data-glf-cuid', cuid);
+                ordersBtn.setAttribute('data-glf-ruid', ruid);
             }
 
             const resWrapper = document.getElementById('hero-reservations-wrapper');
@@ -945,25 +942,21 @@
                 resWrapper.style.setProperty('display', (data.showReservations !== false) ? 'flex' : 'none', 'important');
                 const resBtn = resWrapper.querySelector('menutech-reservations');
                 if (resBtn) {
-                    const newResBtn = document.createElement('menutech-reservations');
-                    newResBtn.setAttribute('cuid', cuid);
-                    newResBtn.setAttribute('ruid', ruid);
-                    newResBtn.setAttribute('background', '#1a1a1a');
-                    newResBtn.setAttribute('color', '#ffffff');
-                    newResBtn.setAttribute('data-glf-cuid', cuid);
-                    newResBtn.setAttribute('data-glf-ruid', ruid);
-                    newResBtn.setAttribute('data-glf-reservation', 'true');
-                    resBtn.parentNode.replaceChild(newResBtn, resBtn);
+                    resBtn.setAttribute('cuid', cuid);
+                    resBtn.setAttribute('ruid', ruid);
+                    resBtn.setAttribute('data-glf-cuid', cuid);
+                    resBtn.setAttribute('data-glf-ruid', ruid);
+                    resBtn.setAttribute('data-glf-reservation', 'true');
                 }
             }
 
             // Reintentar la conexión si el script de MenuTech aún está cargando
-const checkGLF = setInterval(() => {
-    if (typeof window.glfBindButtons === 'function') {
-        window.glfBindButtons();
-        clearInterval(checkGLF);
-    }
-}, 300); // Verifica cada 300ms hasta que el script responda
+            const checkGLF = setInterval(() => {
+                if (typeof window.glfBindButtons === 'function') {
+                    window.glfBindButtons();
+                    clearInterval(checkGLF);
+                }
+            }, 300); // Verifica cada 300ms hasta que el script responda
 
             if (data.heroImg) {
                 const heroSection = document.getElementById('hero-section');
